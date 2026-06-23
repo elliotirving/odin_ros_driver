@@ -114,7 +114,7 @@ double get_ptp_smoothed_offset() {
 
  // usb device
 static std::string TARGET_VENDOR = "2207";
-static std::string TARGET_PRODUCT = "001a";
+static std::string TARGET_PRODUCT = "0019";
 // Global configuration variables
 int g_sendrgb = 1;
 int g_sendimu = 1;
