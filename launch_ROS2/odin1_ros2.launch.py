@@ -40,9 +40,12 @@ def generate_launch_description():
 
     pcd2depth_config_path = os.path.join(package_dir, 'config', 'control_command.yaml')
     with open(pcd2depth_config_path, 'r') as f:
-        pcd2depth_params = yaml.safe_load(f) 
-    pcd2depth_calib_path = os.path.join(package_dir, 'config', 'calib.yaml')
-    pcd2depth_params['calib_file_path'] = pcd2depth_calib_path 
+        pcd2depth_params = yaml.safe_load(f)
+    # calib.yaml is downloaded from device at runtime into the source config dir,
+    # not the install/share dir, so resolve via this launch file's real path.
+    source_package_dir = os.path.dirname(os.path.dirname(os.path.realpath(os.path.abspath(__file__))))
+    pcd2depth_calib_path = os.path.join(source_package_dir, 'config', 'calib.yaml')
+    pcd2depth_params['calib_file_path'] = pcd2depth_calib_path
     pcd2depth_node = Node(
         package='odin_ros_driver',
         executable='pcd2depth_ros2_node',  
